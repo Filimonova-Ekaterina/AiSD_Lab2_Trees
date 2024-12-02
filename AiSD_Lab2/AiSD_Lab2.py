@@ -2,6 +2,7 @@ import random
 from random import randint
 import matplotlib.pyplot as plt
 import numpy as np
+import math
 
 class BinaryTree:
     def __init__(self, key):
@@ -163,9 +164,9 @@ class RedBlackTree:
                     delete_key.parent.l = delete_key.l or delete_key.r
                 else:
                     delete_key.parent.r = delete_key.l or delete_key.r
-            if delete_key.l or delete_key.r is not None:
+            if delete_key.l is not None or delete_key.r is not None:
                 (delete_key.l or delete_key.r).parent = delete_key.parent
-            print("Удалено значение = ", key)
+            #print("Удалено значение = ", key)
         else:
             successor = delete_key.r
             while successor.l is not None:
@@ -439,8 +440,8 @@ def bfs(root):
 
 
 random.seed(1)
-key_count = 16
-max_key = 100
+key_count = 100
+max_key = 1000
 height_arr=[]
 key_count_arr = []
 
@@ -493,18 +494,24 @@ dfs_3(AVL_tree, AVL_tree.root)
 print("\nв ширину: ")
 bfs(AVL_tree.root)
 print("\nКорень ", AVL_tree.root.key , " высота ", AVL_tree.root.height)
+#theory_up=[]
+#theory_down=[]
 #for j in range(10):
-#    RB_key=[i for i in range(key_count)]
-#    RB_tree=RedBlackTree()
+#    AVL_key=[i for i in range(key_count)]
+#    AVL_tree=AVLTree()
 #    for i in range(key_count):
-#        RB_tree.insert(RB_key[i])
+#        AVL_tree.insert_key(AVL_key[i])
 #    key_count_arr.append(key_count)
-#    height_arr.append( RB_tree.final_height())
+#    height_arr.append( AVL_tree.root.height)
+#    theory_up.append((math.log(key_count,1.63)+1))
+#    theory_down.append(math.log(key_count,2))
 #    key_count+=1000
 
 #print(key_count_arr)
 #print(height_arr)
-##plt.plot(key_count_arr,height_arr,marker='o',markersize = 4,color="b")
+#plt.plot(key_count_arr,height_arr,label = "practical result", marker='o',markersize = 4,color="b")
+#plt.plot(key_count_arr,theory_up,label = "upper estimates", marker='o',markersize = 4,color="r")
+#plt.plot(key_count_arr,theory_down,label = "asymptotics", marker='o',markersize = 4,color="g")
 #sizes = np.array(key_count_arr)
 #heights = np.array(height_arr)
 #coeffs = np.polyfit(sizes, heights, 2)
@@ -514,8 +521,9 @@ print("\nКорень ", AVL_tree.root.key , " высота ", AVL_tree.root.hei
 #plt.plot(sizes, poly(sizes), color='red')
 #plt.xlabel('Number of keys')
 #plt.ylabel('Height of the tree')
-#plt.title ('Red Black tree')
-#plt.savefig("113.png")
+#plt.title ('AVL tree')
+#plt.legend()
+#plt.savefig("221.png")
 #plt.show()
 
 
